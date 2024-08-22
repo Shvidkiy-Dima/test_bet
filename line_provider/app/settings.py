@@ -12,5 +12,6 @@ class Settings(BaseSettings):
 
     BET_MAKER_CALLBACK_URL: str = "http://localhost:8001/api/v1/callback/event"
 
+    QUEUE_NAME: str = 'event'
 
 settings = Settings()

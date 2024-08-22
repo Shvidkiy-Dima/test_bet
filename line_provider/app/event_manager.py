@@ -33,8 +33,7 @@ class EventManager:
 
         cls.channel = await cls.connection.channel()
 
-        await cls.channel.queue_delete("event")
-        queue = await cls.channel.declare_queue("event")
+        queue = await cls.channel.declare_queue(settings.QUEUE_NAME)
 
         await queue.consume(callback=cls.on_event, no_ack=False)
 
@@ -44,7 +43,7 @@ class EventManager:
         message = json.dumps(jsonable_encoder(message)).encode()
         await cls.channel.default_exchange.publish(
             Message(message),
-            routing_key="event",
+            routing_key=settings.QUEUE_NAME,
         )
 
     @classmethod
