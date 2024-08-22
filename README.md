@@ -9,3 +9,6 @@
 # Tests
     make build
     make run-test
+
+# Linter 
+    make format
