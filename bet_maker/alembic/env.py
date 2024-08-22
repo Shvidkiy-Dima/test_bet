@@ -22,7 +22,9 @@ if config.config_file_name is not None:
 import sys
 app_dir = Path(__file__).resolve().parent.parent  / 'app'
 sys.path.insert(0, str(app_dir))
-from  models.base import Base
+from models.base import Base
+from models.event import *
+from models.bet import *
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,

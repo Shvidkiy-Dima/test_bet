@@ -10,4 +10,5 @@ run-local:
 	docker compose -f  docker/docker-compose.yml  up
 
 run-test:
-	docker compose -f  docker/docker-compose.test.yml  up
+	docker compose -f  docker/docker-compose.test.yml up --abort-on-container-exit --exit-code-from bet_maker
+

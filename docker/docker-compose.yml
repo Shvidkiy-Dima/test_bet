@@ -38,8 +38,10 @@ services:
     env_file:
       - envs/dev.env
 
+
   db:
-    image: postgres:latest
-    restart: "always"
+    hostname: db
+    image: kartoza/postgis
+    restart: always
     env_file:
       - envs/dev.env

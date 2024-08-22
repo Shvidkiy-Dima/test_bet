@@ -11,7 +11,7 @@ services:
         - db
         - line_provider
     command: bash /app/start.sh
-    restart: "always"
+    restart: "no"
     env_file:
       - envs/test.env
 
@@ -22,11 +22,11 @@ services:
     image: line_provider
     depends_on:
       - db
-    restart: "always"
+    restart: "no"
     command: bash /app/start.sh
     env_file:
       - envs/test.env
-      -
+
   rabbit:
     hostname: rabbit
     image: rabbitmq:3.8.16-management
@@ -34,8 +34,10 @@ services:
     env_file:
       - envs/test.env
 
+
   db:
-    image: postgres:latest
-    restart: "always"
+    hostname: db
+    image: kartoza/postgis
+    restart: always
     env_file:
       - envs/test.env
