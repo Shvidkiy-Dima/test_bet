@@ -1,0 +1,45 @@
+version: '3.5'
+
+services:
+
+  bet_maker:
+    build:
+      context: ../
+      dockerfile: bet_maker/Dockerfile
+    image: bet_maker
+    depends_on:
+        - db
+        - line_provider
+    command: bash /app/start.sh
+    restart: "always"
+    ports:
+      - "8000:8000"
+    env_file:
+      - envs/dev.env
+
+  line_provider:
+    build:
+      context: ../
+      dockerfile: line_provider/Dockerfile
+    image: line_provider
+    depends_on:
+      - db
+    restart: "always"
+    command: bash /app/start.sh
+    ports:
+      - "8001:8000"
+    env_file:
+      - envs/dev.env
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.8.16-management
+    restart: always
+    env_file:
+      - envs/dev.env
+
+  db:
+    image: postgres:latest
+    restart: "always"
+    env_file:
+      - envs/dev.env
